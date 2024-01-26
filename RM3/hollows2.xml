@@ -1,0 +1,7 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo details = "75107" imagepath = "RMs\small\North America\hollows" displayName = "Deathly Hollows (fixed)" cannotReplace = ""
+		loadDetails="75108" loadBackground="RMs\small\other\northamerica">
+   <loadss>patch\ozarks\ozarks_ss_01</loadss>
+   <loadss>patch\ozarks\ozarks_ss_02</loadss>
+   <loadss>patch\ozarks\ozarks_ss_03</loadss>
+</mapinfo>
