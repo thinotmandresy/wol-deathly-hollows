@@ -78,6 +78,15 @@ int getUnit(int unit_type_id = -1, int owner_id = 1, vector location = cInvalidV
     return(unit_id);
 }
 
+int getUnitCount(int unit_type_id = -1, int owner_id = -1, int state_id = 2)
+{
+    int ctx = xsGetContextPlayer();
+    xsSetContextPlayer(owner_id);
+    int count = kbUnitCount(owner_id, unit_type_id, state_id);
+    xsSetContextPlayer(ctx);
+    return(count);
+}
+
 // ============================================================================
 // Initialization
 // ============================================================================
@@ -133,7 +142,6 @@ inactive
 minInterval 300
 {
     xsDisableSelf();
-    xsDisableRule("DullahanAttacks");
     trSetLighting("316a_russians", 120);
     xsEnableRule("Day");
 }
@@ -221,20 +229,18 @@ minInterval 720
     trSoundPlayFN("Wotta\Catastrophe\CATASTROPHElaugh2.wav", "", -1, "","");
 
     // --------------------------------------------------
-    // Make the Dullahan attack the weakest player
-    // --------------------------------------------------
-    xsEnableRule("DullahanAttacks");
-
-    // --------------------------------------------------
     // Shut down after the 3rd appearance
     // --------------------------------------------------
     if (level == 2) xsDisableSelf();
 }
 
 rule DullahanAttacks
-inactive
+active
 minInterval 5
 {
+    if (getUnitCount(trQuestVarGet("UTypeAbstractCavalry"), 0, 2) == 0)
+        return;
+    
     int dullahan = getUnit(trQuestVarGet("UTypeAbstractCavalry"), 0);
     int target = getUnit(trQuestVarGet("UTypeAll"), trQuestVarGet("HollowsWeakestPlayer"), kbGetMapCenter());
     vector target_pos = getUnitPosition(target);
