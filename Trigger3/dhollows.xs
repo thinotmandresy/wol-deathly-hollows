@@ -234,6 +234,7 @@ minInterval 720
     for (i = 1; < 9)
     {
         if (kbIsPlayerValid(i) == false) break;
+        if (trPlayerDefeated(i) == true) continue;
         int pop = trPlayerGetPopulation(i);
         if (pop < weakest_player_pop)
         {
