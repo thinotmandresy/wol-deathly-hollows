@@ -112,8 +112,12 @@ runImmediately
 
 rule Night1
 active
-minInterval 300
+minInterval 1
+runImmediately
 {
+    if (trTime() - cActivationTime < 300)
+        return;
+
     xsDisableSelf();
     trSetLighting("spc14anight", 120);
     xsEnableRule("Eclipse");
@@ -121,8 +125,12 @@ minInterval 300
 
 rule Eclipse
 inactive
-minInterval 400
+minInterval 1
+runImmediately
 {
+    if (trTime() - cActivationTime < 400)
+        return;
+
     xsDisableSelf();
     trSetLighting("hollows_eclipse", 5);
     xsEnableRule("Night2");
@@ -130,8 +138,12 @@ minInterval 400
 
 rule Night2
 inactive
-minInterval 10
+minInterval 1
+runImmediately
 {
+    if (trTime() - cActivationTime < 10)
+        return;
+
     xsDisableSelf();
     trSetLighting("spc14anight", 5);
     xsEnableRule("Morning");
@@ -139,8 +151,12 @@ minInterval 10
 
 rule Morning
 inactive
-minInterval 300
+minInterval 1
+runImmediately
 {
+    if (trTime() - cActivationTime < 300)
+        return;
+
     xsDisableSelf();
     trSetLighting("316a_russians", 120);
     xsEnableRule("Day");
@@ -148,8 +164,12 @@ minInterval 300
 
 rule Day
 inactive
-minInterval 400
+minInterval 1
+runImmediately
 {
+    if (trTime() - cActivationTime < 400)
+        return;
+
     xsDisableSelf();
     trSetLighting("spc14a", 120);
     xsEnableRule("Night1");
